@@ -1,0 +1,36 @@
+# Como executar o projeto no PHP-Laravel
+
+Primeiro, clone o repositório para sua máquina:
+
+```sh
+git clone https://github.com/project-managment/lista-tarefas-app/
+```
+
+Antes de continuar, certifique-se que o computador tem `docker-compose` instalado na sua máquina:
+
+```sh
+docker-compose --version
+```
+
+Se o computador não tem `docker-compose` instalado, utilize o script `install-docker-compose.sh`:
+
+```sh
+./install-docker-compose.sh
+```
+
+Feche e reabra seu terminal, e execute novamente:
+
+```sh
+docker-compose --version
+```
+
+Pronto! Agora que você tem `docker-compose` instalado, realize o deploy da aplicação pela primeira vez:
+
+```sh
+./deploy.sh
+```
+Depois que terminar, se não ocorrer nenhum erro, você já pode ver que a aplicação funcionando:
+
+```sh
+docker-compose up
+```
