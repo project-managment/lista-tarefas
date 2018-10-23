@@ -1,41 +1,34 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Button, FormGroup, FormControl, ControlLabel, Grid, Col, Row } from 'react-bootstrap';
 import API from '../tils/Api';
 
 
-export default class Login extends Component {
+export default class Cadastro extends Component{
   constructor(){
-    super()
+    super();
     this.state = {
-      email: "", senha: ""
+      name: "", email: "", senha: ""
     }
 
-    this.logarUsuario = event => {
+    this.cadastroUsuario = event =>{
       const usuario = {
-        email: this.state.email, password: this.state.senha
+        name: this.state.name, email: this.state.email, password: this.state.senha
       }
-
-      API.post('user/authenticate', usuario)
+      API.post('user/create', usuario)
   		.then((response) => {
-        var token = response.data.token;
-        sessionStorage.setItem('token', token);
         console.log(response.data);
   		})
   		.catch((error) =>{
-        console.log(error.response);
   		});
       event.preventDefault();
     }
-
   }
-
 
   handleChange = event => {
    this.setState({
      [event.target.id]: event.target.value
    });
- }
-
+  }
 
   render(){
     return(
@@ -43,8 +36,17 @@ export default class Login extends Component {
         <Row>
           <Col sm={3} xs={3} md={3} />
           <Col sm={6} xs={6} md={6} >
-            <h1>Login</h1>
-            <form onSubmit={this.logarUsuario}>
+            <h1>Cadastro</h1>
+            <form onSubmit={this.cadastroUsuario}>
+            <FormGroup controlId="name" bsSize="large">
+              <ControlLabel>Nome</ControlLabel>
+              <FormControl
+              autoFocus
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange}
+              />
+            </FormGroup>
             <FormGroup controlId="email" bsSize="large">
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -66,7 +68,7 @@ export default class Login extends Component {
             type="submit"
             bsStyle="primary"
             >
-            Logar
+            Cadastrar
             </Button>
             </form>
           </Col>
