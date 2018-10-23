@@ -18,6 +18,9 @@ export default class NavbarGer extends Component {
     <NavItem eventKey={2} href="#">
       <Link to="/Login">Login </Link>
     </NavItem>
+    <NavItem eventKey={2} href="#">
+      <Link to="/Cadastro">Cadastrar </Link>
+    </NavItem>
   </Nav>
 </Navbar>
     );
