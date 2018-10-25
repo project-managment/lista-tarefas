@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {Button, FormGroup, FormControl, ControlLabel, Grid, Col, Row } from 'react-bootstrap';
 import API from '../tils/Api';
 
@@ -7,7 +8,7 @@ export default class Login extends Component {
   constructor(){
     super()
     this.state = {
-      email: "", senha: ""
+      email: "", senha: "", isLogged: false
     }
 
     this.logarUsuario = event => {
@@ -19,7 +20,9 @@ export default class Login extends Component {
   		.then((response) => {
         var token = response.data.token;
         sessionStorage.setItem('token', token);
-        console.log(response.data);
+        this.setState({
+          isLogged: true
+        })
   		})
   		.catch((error) =>{
         console.log(error.response);
@@ -38,6 +41,9 @@ export default class Login extends Component {
 
 
   render(){
+    if(this.state.isLogged){
+      return <Redirect to='./' />
+    }
     return(
       <Grid className="style">
         <Row>

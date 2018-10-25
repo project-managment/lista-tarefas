@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {isLoggedIn} from './components/tils/Auth.js';
 import Home from './components/pages/Home';
 import Listar from './components/pages/Listar';
 import Login from './components/pages/Login';
@@ -8,7 +9,24 @@ import Navbar from './components/layout/Navbar';
 import logo from './logo.svg';
 import './App.css';
 
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+  {...rest}
+  render={props =>
+    isLoggedIn() ? (
+      <Component {...props} />
+      ) : (
+      <Redirect
+      to='/'
+      />
+      )
+    }
+    />
+    );
+
 class App extends Component {
+
   render() {
     return (
       <Router>
@@ -16,7 +34,7 @@ class App extends Component {
       <Navbar />
       <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/Listar" component={Listar} />
+      <PrivateRoute exact path="/Listar" component={Listar} />
       <Route exact path="/Login" component={Login} />
       <Route exact path="/Cadastro" component={Cadastro} />
       </Switch>

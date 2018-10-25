@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Table, Grid, Row, Col} from 'react-bootstrap';
+import {getToken} from '../tils/Auth';
 import API from '../tils/Api';
 
 export default class Listar extends Component{
@@ -11,7 +12,7 @@ export default class Listar extends Component{
   }
 
   componentWillMount(){
-		API.get('tasks')
+		API.get('tasks?api_token=' + getToken())
 		.then((response) => {
 			this.setState({
 				tarefas: response.data,
