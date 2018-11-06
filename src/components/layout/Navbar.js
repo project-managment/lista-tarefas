@@ -21,7 +21,9 @@ export default class NavbarGer extends Component {
       </Nav>
       <Nav pullRight>
         <NavItem eventKey={2} href="#">
-          <Link to="/Cadastro">Cadastrar </Link>
+          {
+            (isLoggedIn() ? (<div></div>) : (<Link to="/Cadastro"> Cadastrar </Link>))
+          }
         </NavItem>
         <NavItem eventKey={2} href="#">
         {
