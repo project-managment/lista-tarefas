@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Grid, Row, Col} from 'react-bootstrap';
+import {Table, Grid, Row, Col, Checkbox} from 'react-bootstrap';
 import {getToken} from '../tils/Auth';
 import API from '../tils/Api';
 
@@ -31,6 +31,7 @@ export default class Listar extends Component{
       <Table striped bordered condensed hover>
      <thead>
      <tr>
+     <th></th>
      <th>ID</th>
      <th>TÍTULO</th>
      <th>DESCRIÇÃO</th>
@@ -40,6 +41,7 @@ export default class Listar extends Component{
       {
         this.state.tarefas.map((row, index) => (
           <tr>
+          <td>  <Checkbox></Checkbox> </td>
           <td>{row.id}</td>
           <td>{row.title}</td>
           <td>{row.description}</td>
