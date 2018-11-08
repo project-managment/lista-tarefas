@@ -6,10 +6,14 @@ import API from '../tils/Api';
 
 export default class Login extends Component {
   constructor(){
-    super()
+    super();
     this.state = {
-      email: "", senha: "", isLogged: false
+      email: "", senha: "", isLogged: false, isLoading: false
     }
+
+    this.setState({
+      isLoading: true
+    });
 
     this.logarUsuario = event => {
       const usuario = {
@@ -21,17 +25,25 @@ export default class Login extends Component {
         var token = response.data.token;
         sessionStorage.setItem('token', token);
         this.setState({
-          isLogged: true
+          isLogged: true,
+          isLoading: false
         })
   		})
-  		.catch((error) =>{
+      .catch(error =>{
         console.log(error.response);
-  		});
-      event.preventDefault();
+          this.setState({
+            isLoading: false
+          });
+          if(error.response.status === 401){
+            alert('Email ou Senha Invalidos');
+          }
+          if(error.response.status === 422){
+            alert('Email Invalido');
+          }
+        })
+        event.preventDefault();
     }
-
   }
-
 
   handleChange = event => {
    this.setState({
@@ -71,8 +83,10 @@ export default class Login extends Component {
             <Button
             type="submit"
             bsStyle="primary"
+            disabled={this.state.isLoading}
+            onClick={!this.state.isLoading ? this.handleChange : null}
             >
-            Logar
+            {!this.state.isLoading ? 'Logar' : 'Carregando'}
             </Button>
             </form>
           </Col>
