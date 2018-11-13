@@ -11,14 +11,14 @@ export default class Login extends Component {
       email: "", senha: "", isLogged: false, isLoading: false
     }
 
-    this.setState({
-      isLoading: true
-    });
-
     this.logarUsuario = event => {
       const usuario = {
         email: this.state.email, password: this.state.senha
       }
+
+      this.setState({
+        isLoading: true
+      });
 
       API.post('user/authenticate', usuario)
   		.then((response) => {
