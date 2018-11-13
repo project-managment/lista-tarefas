@@ -34,12 +34,6 @@ export default class Login extends Component {
           this.setState({
             isLoading: false
           });
-          if(error.response.status === 401){
-            alert('Email ou Senha Invalidos');
-          }
-          if(error.response.status === 422){
-            alert('Email Invalido');
-          }
         })
         event.preventDefault();
     }
