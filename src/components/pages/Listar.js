@@ -7,7 +7,7 @@ export default class Listar extends Component{
   constructor(){
     super();
     this.state = {
-      tarefas: [], apagadas: [], feitas: [], showModal: false, titulo: '', descricao: ''
+      tarefas: [], apagadas: [], feitas: [], showModal: false, titulo: '', descricao: '', pos: ''
     }
 
     this.apagarTarefa = evento => {
@@ -62,11 +62,23 @@ export default class Listar extends Component{
       })
     };
 
+    this.editar = evento => {
+      evento.persist();
+      var tarefas = [...this.state.tarefas];
+      let tarefa = tarefas[this.state.pos]
+      tarefa.title = this.state.titulo;
+      tarefa.description = this.state.descricao;
+
+      this.setState({
+        showModal: false
+      })
+    }
+
     this.handleModal = evento => {
       var tarefas = [...this.state.tarefas];
       let tarefa = tarefas[evento.target.getAttribute('pos')]
       this.setState({
-        showModal: true, titulo: tarefa.title, descricao: tarefa.description
+        showModal: true, titulo: tarefa.title, descricao: tarefa.description, pos: evento.target.getAttribute('pos')
       })
     }
 
@@ -205,7 +217,8 @@ export default class Listar extends Component{
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleHide}>Close</Button>
+            <Button onClick={this.editar} bsStyle="success"> Confirmar</Button>
+            <Button onClick={this.handleHide} bsStyle="danger">Cancelar</Button>
           </Modal.Footer>
         </Modal>
       </Grid>
