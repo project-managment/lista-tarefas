@@ -130,6 +130,8 @@ export default class Listar extends Component{
           <Col md={2}/>
         </Row>
 
+
+          { this.state.feitas.length ? (
         <Row>
           <Col md={2}/>
           <Col md={8}>
@@ -156,9 +158,9 @@ export default class Listar extends Component{
             </Table>
           </Col>
           <Col md={2}/>
-        </Row>
+        </Row> ) : '' }
 
-        <Row>
+        {this.state.apagadas.length ? (<Row>
           <Col md={2}/>
           <Col md={8}>
             <h1>APAGADAS</h1>
@@ -184,7 +186,7 @@ export default class Listar extends Component{
             </Table>
           </Col>
           <Col md={2}/>
-        </Row>
+        </Row>) : ''}
 
         <Modal
           show={this.state.showModal}
