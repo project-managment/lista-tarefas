@@ -13,19 +13,24 @@ export default class NavbarGer extends Component {
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <NavItem eventKey={1} href="#">
+        <NavItem eventKey={1}>
           {
             (isLoggedIn() ? (<Link to="/Listar"> Listar Tarefas </Link>) : (<div></div>))
           }
         </NavItem>
+        <NavItem eventKey={2}>
+          {
+            (isLoggedIn() ? (<Link to="/Criar"> Criar Tarefa </Link>) : (<div></div>))
+          }
+        </NavItem>
       </Nav>
       <Nav pullRight>
-        <NavItem eventKey={2} href="#">
+        <NavItem eventKey={3}>
           {
             (isLoggedIn() ? (<div></div>) : (<Link to="/Cadastro"> Cadastrar </Link>))
           }
         </NavItem>
-        <NavItem eventKey={2} href="#">
+        <NavItem eventKey={3}>
         {
           (isLoggedIn() ? (<Link to ="/" onClick={() => logout()}> Logout </Link>) : (<Link to="/Login">Login </Link>))
         }
