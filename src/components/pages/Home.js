@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Table, Grid, Row, Col} from 'react-bootstrap';
+import { Grid,Table, Row, Col} from 'react-bootstrap';
 
-
+//table
 export default class Home extends Component {
   render(){
     return(

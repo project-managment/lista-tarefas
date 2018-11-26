@@ -32,10 +32,13 @@ export default class Login extends Component {
       .catch(error =>{
         console.log(error.response);
           this.setState({
-            isLoading: false
+            isLoading: false,
+          
           });
         })
+        
         event.preventDefault();
+        alert("usuário ou senha inválidos");
     }
   }
 

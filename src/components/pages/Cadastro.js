@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button, FormGroup, FormControl, ControlLabel, Grid, Col, Row } from 'react-bootstrap';
+import {Button,Checkbox, FormGroup, FormControl, ControlLabel, Grid, Col, Row } from 'react-bootstrap';
 import API from '../tils/Api';
-
+//
 
 export default class Cadastro extends Component{
   constructor(){
@@ -17,9 +17,15 @@ export default class Cadastro extends Component{
       API.post('user/create', usuario)
   		.then((response) => {
         console.log(response.data);
+
+        alert("usuário cadrastrado com sucesso , ta ok");
   		})
   		.catch((error) =>{
-  		});
+        
+
+
+      });
+      
       event.preventDefault();
     }
   }

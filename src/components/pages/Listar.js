@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Grid, Row, Col, Checkbox, Button, Modal, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import {Table, Grid, Row, Col, Button, Modal, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 import {getToken} from '../tils/Auth';
 import API from '../tils/Api';
 
