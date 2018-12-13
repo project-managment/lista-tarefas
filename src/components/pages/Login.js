@@ -29,14 +29,18 @@ export default class Login extends Component {
           isLoading: false
         })
   		})
-      .catch(error =>{
+      .catch((error) => {
         console.log(error.response);
           this.setState({
             isLoading: false
           });
+          if (error.response == 'undefined'){
+            alert('Serviço indisponivel, tente novamente mais tarde!')
+          }
           if (error.response.status === 401) {
             alert('Email ou Senha Invalidos');
           }
+
         })
         event.preventDefault();
     }

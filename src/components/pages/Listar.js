@@ -7,7 +7,7 @@ export default class Listar extends Component{
   constructor(){
     super();
     this.state = {
-      tarefas: [], apagadas: [], feitas: [], showModal: false, titulo: '', descricao: '', pos: ''
+      tarefas: [], apagadas: [], feitas: [], showModal: false, titulo: '', descricao: '', pos: '', tarefas_hoje: []
     }
 
     this.apagarTarefa = evento => {
@@ -105,6 +105,12 @@ export default class Listar extends Component{
 		})
 		.catch((error) =>{
 		});
+    API.get('tasks/date/' + new Date() + '?api_token' + getToken())
+    .then((response) => {
+      this.setState({
+        tarefas_hoje: response.data
+      })
+    })
 	}
 
   render(){
@@ -114,7 +120,7 @@ export default class Listar extends Component{
           <Col md={2}/>
           <Col md={8}>
             <h1>TAREFAS</h1>
-            <Table striped bordered condensed hover>
+            <Table striped bordered response condensed hover>
             <thead>
              <tr>
                 <th>TÍTULO</th>
@@ -142,13 +148,41 @@ export default class Listar extends Component{
           <Col md={2}/>
         </Row>
 
+        {this.state.tarefas_hoje.length ? (<Row>
+          <Col md={2}/>
+          <Col md={8}>
+            <h1>TAREFAS DE HOJE</h1>
+            <Table striped response bordered condensed hover>
+            <thead>
+             <tr>
+                <th>TÍTULO</th>
+                <th>DESCRIÇÃO</th>
+                <th></th>
+             </tr>
+             </thead>
+             <tbody>
+              {
+                this.state.apagadas.map((row, index) => (
+                  <tr>
+                    <td>{row.title}</td>
+                    <td>{row.description}</td>
+                    <td><Button id={row.id} pos={index} bsStyle="success" onClick={this.restaurarTarefa}>RESTAURAR</Button></td>
+                  </tr>
+                ))
+              }
+            </tbody>
+            </Table>
+          </Col>
+          <Col md={2}/>
+        </Row>) : ''}
+
 
           { this.state.feitas.length ? (
         <Row>
           <Col md={2}/>
           <Col md={8}>
             <h1>FEITAS</h1>
-            <Table striped bordered condensed hover>
+            <Table striped response bordered condensed hover>
             <thead>
              <tr>
                 <th>TÍTULO</th>
@@ -176,7 +210,7 @@ export default class Listar extends Component{
           <Col md={2}/>
           <Col md={8}>
             <h1>APAGADAS</h1>
-            <Table striped bordered condensed hover>
+            <Table striped response bordered condensed hover>
             <thead>
              <tr>
                 <th>TÍTULO</th>
